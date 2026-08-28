@@ -9,9 +9,14 @@ import json
 import logging
 from typing import Dict, Any
 
-from handlers.s3_remediation import remediate_s3_public_access
-from handlers.security_group_cleaner import remediate_open_security_group
-from handlers.ebs_encryption_guard import remediate_unencrypted_ebs
+try:
+    from src.handlers.s3_remediation import remediate_s3_public_access
+    from src.handlers.security_group_cleaner import remediate_open_security_group
+    from src.handlers.ebs_encryption_guard import remediate_unencrypted_ebs
+except ImportError:
+    from handlers.s3_remediation import remediate_s3_public_access
+    from handlers.security_group_cleaner import remediate_open_security_group
+    from handlers.ebs_encryption_guard import remediate_unencrypted_ebs
 
 logger = logging.getLogger("IncidentDispatcher")
 logger.setLevel(logging.INFO)
